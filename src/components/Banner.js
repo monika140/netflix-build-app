@@ -40,9 +40,9 @@ function Banner() {
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage:
-          `url("https://img.freepik.com/premium-vector/abstract-modern-dark-banner-background-with-rainbow-colorful-line_105555-115.jpg")`,
-        // backgroundImage: `url("https://image.tmbd.org/t/p/originals/${movie?.backdrop_path}")`,
+        height: "500px",
+        // `url("https://img.freepik.com/premium-vector/abstract-modern-dark-banner-background-with-rainbow-colorful-line_105555-115.jpg")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         backgroundPosition: "center center",
       }}
     >

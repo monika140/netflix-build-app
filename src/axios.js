@@ -16,7 +16,7 @@ const fetecher = async (method, endpoints) => {
         // fetch(url, options).
         //     then(res => res.json()).
         //     then(result => console.log(result))
-
+        console.log("url==>", url);
         let response = await fetch(url, options)
         // // The upcomming response comming in the string or bytes format so here required to parse the data into json!.
         let json = await response.json()
