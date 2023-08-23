@@ -6,7 +6,7 @@ import endpoints from "./Requests";
 function Row({ title, fetchUrl, isLargeRow = false }) {
   const [movies, setMovie] = useState([]);
   //This defines a React functional component named Row. It takes three props: title, fetchUrl, and isLargeRow. The isLargeRow prop has a default value of false if not provided.
-  const base_url = "htpps://image.tmdb.org/t/p/original/";
+  const base_url = "https://image.tmdb.org/t/p/original/";
 
   const dataFetech = async () => {
     let response = await instance("GET", endpoints.fetchComedyMovies);
@@ -29,17 +29,22 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
       <h2>{title}</h2>
       <div className="row_posters">
         {movies && //operators use kre the bcz error show ho rhe the
-          movies.map((movie) => (
-            <img
-              className={`row_poster ${isLargeRow && "row_posterLarge"}`}
-              key={movie.id}
-              src={`${"base_url"}${
-                isLargeRow ? movie.poster_path : movie.backdrop_path//yaha prob hai yaha posters p image show nhi ho rhi haii
-              }`}
-              alt={movie.name}
-            />
+          movies.map(
+            (movie) => (
+              //(isLargeRow && movie.poster_path) ||
+              //(!isLargeRow && movie.backdrop_path && (
+                <img
+                  className={`row_poster ${isLargeRow && "row_posterLarge"}`}
+                  key={movie.id}
+                  src={`${base_url}${
+                    isLargeRow ? movie.poster_path : movie.backdrop_path //yaha prob hai yaha posters p image show nhi ho rhi haii
+                  }`}
+                  alt={movie.name}
+                />
+              )
+
             // the movies state is mapped using the map function. For each movie in the movies array, an <img> element is rendered.
-          ))}
+          )}
       </div>
     </div>
   );

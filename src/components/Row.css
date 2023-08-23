@@ -1,7 +1,7 @@
 .row {
   background-color: black;
   color: white;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 .row_posters {
   display: flex;
@@ -13,10 +13,10 @@
   display: none;
 }
 .row_poster {
-  max-height: 100px;
+  max-height: 200px;
   object-fit: contain;
   margin-right: 10px;
-  width: 100px;
+  width: 200px;
   transition: transition 450ms;
 }
 .row_poster:hover {
