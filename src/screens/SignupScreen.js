@@ -1,54 +1,57 @@
-import { useRef } from "react";
+import { useState } from "react";
 import React from "react";
-import { auth } from "../config/firebase";
+import { auth, googleProvider } from "../config/firebase";
 import "./SignupScreen.css";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
-const SignupScreen = () => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+const SignUpScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const register = (e) => {
     e.preventDefault();
 
-    auth
-      .createUserWithEmailAndPassword(
-        emailRef.current.value,
-        passwordRef.current.value
-      )
-      .then((authUser) => {
-        console.log(authUser);
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    const signIn = async () => {
+      //we use async await bcz when we are working with firebase lot of stuff return promise so we use sync await
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        console.error(err);
+      }
+    };
   };
 
-  const signIn = (e) => {
+  const signInGoogle = (e) => {
     e.preventDefault();
-  };
 
-  auth
-    .signInWithEmailAndPassword(
-      emailRef.current.value,
-      passwordRef.current.value
-    )
-    .then((authUser) => {
-      console.log(authUser);
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
+    const signInWithGoogle = async () => {
+      try {
+        await signInWithPopup(auth, googleProvider);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  };
 
   return (
     <div className="signupScreen">
       <form>
         <h1>Sign In</h1>
-        <input placeholder="Email" type="email" ref={emailRef} />
+        <input
+          placeholder="Email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-        <input placeholder="Password" type="password" ref={passwordRef} />
-        <button type="submit" onClick={signIn}>
+        <input
+          placeholder="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" onClick={signInGoogle}>
           Sign In
         </button>
+
         <h4>
           <span className="signupScreen_gray">New to Netflix?</span>
           <span className="signupScreen_link" onClick={register}>
@@ -60,4 +63,4 @@ const SignupScreen = () => {
   );
 };
 
-export default SignupScreen;
+export default SignUpScreen;

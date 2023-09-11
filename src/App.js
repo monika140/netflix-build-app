@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { auth } from "./config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/userSlice";
+import ProfileScreen from "./screens/ProfileScreen";
 
 const App = () => {
   //const user = null; //agr null hai toh loginscreen screen p  kuch show nhi hoga bcz koi user nahi h
@@ -37,6 +38,9 @@ const App = () => {
           <LoginScreen />
         ) : (
           <Switch>
+            <Route path="/profile">
+              <ProfileScreen />
+            </Route>
             <Route exact path="/">
               <HomeScreen />
             </Route>
