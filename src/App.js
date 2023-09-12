@@ -7,22 +7,25 @@ import { useEffect } from "react";
 import { auth } from "./config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/userSlice";
-import ProfileScreen from "./screens/ProfileScreen";
+import SignUpScreen from "./screens/SignupScreen";
 
 const App = () => {
-  //const user = null; //agr null hai toh loginscreen screen p  kuch show nhi hoga bcz koi user nahi h
+  const user = null; //agr null hai toh loginscreen screen p  kuch show nhi hoga bcz koi user nahi h
   //{ user name h toh show hoga
   //name:"monika" ,
   //};
-
-  const user = useSelector(selectUser);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
-        //logged in
+        //Logged in
         console.log(userAuth);
+        dispatch(
+          login({
+            uid: userAuth.uid,
+            email: userAuth.email,
+          })
+        );
       } else {
         //logged out
         dispatch(logout);
@@ -34,18 +37,14 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        {!user ? (
-          <LoginScreen />
-        ) : (
-          <Switch>
-            <Route path="/profile">
-              <ProfileScreen />
-            </Route>
-            <Route exact path="/">
-              <HomeScreen />
-            </Route>
-          </Switch>
-        )}
+        <Switch>
+          <Route exact path="/">
+            <LoginScreen />
+          </Route>
+          <Route exact path="/">
+            <HomeScreen />
+          </Route>
+        </Switch>
       </Router>
     </div>
   );

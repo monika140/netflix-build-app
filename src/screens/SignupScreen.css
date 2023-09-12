@@ -30,6 +30,19 @@
   border: none;
   padding: 5px 15px;
 }
+
+input[type="checkbox"] {
+  background: #737373;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 0;
+  height: 16px;
+  left: -20px;
+  width: 16px;
+  margin-right: 5px;
+}
+
 .signupScreen > form > button {
   padding: 16px 20px;
   font-size: 1 rem;
